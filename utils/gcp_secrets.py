@@ -16,5 +16,5 @@ def get_stripe_key():
         response = client.access_secret_version(request={"name": name})
         return response.payload.data.decode("UTF-8")
     except Exception as e:
-        print(f"Error accessing GCP Secret: {e}")
+        print(f"error accessing GCP Secret: {e}")
         return None
