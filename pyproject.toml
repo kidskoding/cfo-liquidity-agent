@@ -5,6 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "functions-framework>=3.10.0",
+    "google-cloud-secret-manager>=2.26.0",
+    "python-dotenv>=1.2.1",
+    "requests>=2.32.5",
     "setuptools>=80.9.0",
     "stripe>=14.1.0",
 ]
