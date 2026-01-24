@@ -18,6 +18,7 @@ class Config:
             "DATABRICKS_HOST",
             "DATABRICKS_TOKEN",
             "DATABRICKS_WAREHOUSE_ID",
+            "DATABRICKS_TABLE_PATH",
             "STRIPE_API_KEY"
         ]
         
@@ -26,6 +27,7 @@ class Config:
         self.db_host = self.values.get("DATABRICKS_HOST")
         self.db_token = self.values.get("DATABRICKS_TOKEN")
         self.warehouse_id = self.values.get("DATABRICKS_WAREHOUSE_ID")
+        self.db_table_path = self.values.get("DATABRICKS_TABLE_PATH")
         
         self.w = WorkspaceClient(
             host=self.db_host,
@@ -46,4 +48,4 @@ class Config:
 settings = Config()
 
 def get_gcp_secret(secret_id):
-    return settings.values.get(secret_id)    
+    return settings.values.get(secret_id)

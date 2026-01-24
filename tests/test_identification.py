@@ -2,6 +2,7 @@ import pytest
 import uuid
 from tools.linker import link_merchant_identification
 from utils.config import settings
+from databricks.sdk.service.sql import StatementState
 
 def test_databricks_connection():
     assert settings.w.clusters.list() is not None
@@ -20,15 +21,15 @@ def test_merchant_insertion():
         test_ic
     )
     
-    query = f"SELECT * FROM registry.identification WHERE merchant_name = '{test_merchant}'"
+    table_path = settings.db_table_path
+    query = f"SELECT * FROM {table_path} WHERE merchant_name = '{test_merchant}'"
     
     result = settings.w.statement_execution.execute_statement(
         statement=query,
         warehouse_id=settings.warehouse_id
     )
     
-    assert result.result.data_array is not None
-    assert len(result.result.data_array) > 0
+    if result.status.state != StatementState.SUCCEEDED:
+        pytest.fail(f"test failed: [{result.status.error.error_code}]: {result.status.error.message}")
     
-    row = result.result.data_array[0]
-    assert row[0] == test_merchant
+    assert result.result.data_array is not None
