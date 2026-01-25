@@ -6,7 +6,8 @@ from databricks.sdk.service.sql import StatementState
 
 def test_databricks_connection():
     assert settings.w.clusters.list() is not None
-    
+
+# TEST WILL FAIL IF DATABRICKS IS NOT RUNNING!
 def test_merchant_insertion():
     unique_id = str(uuid.uuid4())[:8]
     test_merchant = f"Test_Cafe_{unique_id}"
