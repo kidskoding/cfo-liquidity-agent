@@ -18,3 +18,5 @@ def get_stripe_key():
     except Exception as e:
         print(f"Error accessing GCP Secret: {e}")
         return None
+
+print(get_stripe_key())
